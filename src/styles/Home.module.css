@@ -244,3 +244,23 @@
 .contentTipo a{
   color: white;
 }
+.buttonContainer {
+  display:flex;
+  margin-top:10px;
+  padding-right:10px;
+}
+.buscardorContainer {
+  flex:1;
+  justify-content:flex-end;
+  display:flex;
+}
+@media (max-width: 500px){
+  .buttonContainer {
+    flex-direction: column;
+  }
+  .buscardorContainer {
+    justify-content:flex-start;
+    margin-top: 10px;
+    margin-left: 10px;
+  }
+}

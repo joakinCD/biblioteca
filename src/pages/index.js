@@ -6,41 +6,15 @@ import CustomItem from '../components/CustomItem'
 import Cabecera from '../components/Cabecera'
 import Multimedia from '../objetos/Multimedia'
 
+
+import { useState,useEffect,useReducer} from "react";
+import { useWindowSize } from '../hooks/myHooks';
+
 const inter = Inter({ subsets: ['latin'] })
-import { useState,useEffect} from "react";
-import { useReducer } from 'react';
-
 function reducer(state, action) {
-  function useWindowSize() {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-      height: undefined,
-    });
+   
 
-    useEffect(() => {
-      // only execute all the code below in client side
-      // Handler to call on window resize
-      function handleResize() {
-        // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
-      }
-      
-      // Add event listener
-      window.addEventListener("resize", handleResize);
-       
-      // Call handler right away so state gets updated with initial window size
-      handleResize();
-      
-      // Remove event listener on cleanup
-      return () => window.removeEventListener("resize", handleResize);
-    }, []); // Empty array ensures that effect is only run on mount
-    return windowSize;
-  }
+  
   let listadoMultimediaAux;
   switch (action.type) {
     case "addElemento":
@@ -77,6 +51,7 @@ function reducer(state, action) {
 
 export default function Home() {
 
+  const size = useWindowSize();
 
   const [listadoElementos, setListadoElementos] = useState([]);
   const [elementosBuscador, setElementosBuscador] = useState([]);
@@ -189,7 +164,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <div style={{width:'100%',height:'100%'}}>
           <Cabecera nombre='Biblioteca'></Cabecera>
-            <div style={{display:'flex', marginTop:10,paddingRight:10}}>
+            <div className={`${styles.buttonContainer}`}>
               <div style={{display:'flex',flex:1}}>
                 <button onClick={changeButtonSel.bind(this,'pelicula')} className={`${styles.contentTipo} ${buttonSel=='pelicula' || buttonSel=='todos'? styles.active : ''}`}>
                   <Image
@@ -197,6 +172,7 @@ export default function Home() {
                     height={18}
                     src={'/icons/film-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
+                    alt="Icono pelicula"
                   />
 
                   <a style={{marginLeft:4}}>Peliculas</a>
@@ -207,6 +183,7 @@ export default function Home() {
                     height={18}
                     src={'/icons/ebook-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
+                    alt="Icono ebook"
                   />
                   <a style={{marginLeft:4}}>e-books</a>
                 </button>
@@ -216,11 +193,12 @@ export default function Home() {
                     height={18}
                     src={'/icons/videojuego-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
+                    alt="Icono videojuego"
                   />
                   <a style={{marginLeft:4}}>Videojuegos</a>
                 </button>
               </div>
-              <div style={{flex:1,justifyContent:'flex-end',display:'flex'}}>
+              <div className={`${styles.buscardorContainer}`}>
                 <input 
                   placeholder='Buscar'
                   value={textoBuscador}
@@ -228,7 +206,7 @@ export default function Home() {
                  />
               </div>
             </div>
-            <ul style={{display: 'grid','grid-template-columns': 'repeat('+3+',auto)',padding:10}}>
+            <ul style={{display: 'grid','gridTemplateColumns': 'repeat('+parseInt(size.width/260)+',auto)',padding:10}}>
               {elementosBuscador.map((item) => <CustomItem key={item.id} multimedia={item} eliminarElemento={dispatch.bind(this,{ type: 'deleteElemento',elemento:item})}/>)}
             </ul>
           </div>
