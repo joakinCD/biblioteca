@@ -12,6 +12,7 @@ const CustomItem = (props) => {
             props.eliminarElemento()
         }
     }
+
     let elemento = props.multimedia
     let urlIcon = '/icons/film-icon.svg'
     switch(elemento.type){
@@ -50,7 +51,7 @@ const CustomItem = (props) => {
                             style={{ filter: 'invert(100%)'}}
                             alt='Icono'
                         />
-                        <a style={{fontWeight:'bold',marginLeft:4,color:'white'}}>{elemento.nombre}</a>
+                        <a style={{fontWeight:'bold',marginLeft:4,color:'white','whiteSpace':'nowrap',overflow:'hidden',textOverflow: 'ellipsis',width:150}}>{elemento.nombre}</a>
                     </div>
                     <div style={{display:'flex'}}>
                         <Image
@@ -81,10 +82,20 @@ const CustomItem = (props) => {
                                         style={{ filter: 'invert(100%)'}}
                                         alt='Icono'
                                     />
-                                    <a style={{fontWeight:'bold',marginLeft:4,color:'white'}}>{elemento.nombre}</a>
+                                    <a style={{fontWeight:'bold',marginLeft:4,color:'white','whiteSpace':'nowrap',overflow:'hidden',textOverflow: 'ellipsis'}}>{elemento.nombre}</a>
                                 </div>
-                            <a style={{color:'white',flex:1}}>{elemento.resumen}</a>
+                            <a style={{color:'white',flex:1,overflow:'auto'}}>{elemento.resumen}</a>
                             <div style={{height:50,display:'flex',justifyContent:'flex-end',alignItems:'center'}}>
+                                {elemento.tuValoracion!=-1?(
+                                    <div style={{paddingRight:4,paddingLeft:4,marginRight:8,height:40,background:'grey',borderRadius:8,display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                        <p style={{color:'white', fontWeight:'bold'}}>Valorado</p>
+                                    </div>
+                                    ):(
+                                    <button onClick={props.cambiarValorar.bind(this,elemento)} style={{paddingRight:4,paddingLeft:4,marginRight:8,height:40,background:'grey',borderRadius:8,display:'flex',justifyContent:'center',alignItems:'center'}}>
+                                        <p style={{color:'white', fontWeight:'bold'}}>Valorar</p>
+                                    </button>
+                                    )
+                                }
                                 <Link href={"/formulario/"+elemento.id} style={{marginRight:8,background:'grey',width:40,height:40,borderRadius:8,display:'flex',justifyContent:'center',alignItems:'center'}}>
                                     <Image
                                         width={22}

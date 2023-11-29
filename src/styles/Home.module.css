@@ -230,8 +230,8 @@
 .contentTipo {
   background: red;
   border-radius: 20px;
-  height: 20px;
-  width: 150px;
+
+  padding: 5px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -243,6 +243,9 @@
 }
 .contentTipo a{
   color: white;
+  font-size: 16px;
+  margin-left:4px;
+  white-space: nowrap;
 }
 .buttonContainer {
   display:flex;
@@ -262,5 +265,8 @@
     justify-content:flex-start;
     margin-top: 10px;
     margin-left: 10px;
+  }
+  .contentTipo a{
+    font-size: 12px;
   }
 }

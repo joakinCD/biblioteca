@@ -5,7 +5,7 @@ import styles from '@/styles/Home.module.css'
 import CustomItem from '../components/CustomItem'
 import Cabecera from '../components/Cabecera'
 import Multimedia from '../objetos/Multimedia'
-
+import ValorarPopUp from '../components/ValorarPopUp'
 
 import { useState,useEffect,useReducer} from "react";
 import { useWindowSize } from '../hooks/myHooks';
@@ -59,6 +59,7 @@ export default function Home() {
   const [textoBuscador, setTextoBuscador] = useState("");
   const [width, setWidth] = useState(0);
   const [state, dispatch] = useReducer(reducer, { listadoMultimedia: [] });
+  const [elementValorar, setElementValorar] = useState(false);
   useEffect(() => {
     setWidth(window.width)
     let listadoMultimediaAux = JSON.parse(localStorage.getItem('listadoMultimedia'))
@@ -94,7 +95,6 @@ export default function Home() {
   }, [textoBuscador]);
 
   useEffect(() => {
-    console.log("change listadoMultimedia", state.listadoMultimedia)
     setListadoElementos(state.listadoMultimedia)
     setElementosBuscador(state.listadoMultimedia)
   }, [state.listadoMultimedia]);
@@ -120,12 +120,12 @@ export default function Home() {
         nombre:tipoAux+' '+i,
         fecha:'2023-12-0'+i,
         puntuacion:Math.floor(Math.random() * 10)+1,
+        numeroValoraciones:Math.floor(Math.random() * 20)+1,
         resumen:'resumen resumen  resumen  resumen  resumen  resumen  resumen  resumen '
       }
       let multimedia = new Multimedia(obj)
       items.push(multimedia)
     }
-    console.log('items',items)
     return items;
   }
   
@@ -137,7 +137,32 @@ export default function Home() {
     }
     
   }
-  
+  const cambiarValorar=(item) =>{
+    setElementValorar(item)
+  }
+  const valorarElemento=(valoracion,item) =>{
+
+     if(item.tuValoracion!=-1){
+       item.tuValoracion=valoracion
+       item.puntuacion = (((item.numeroValoraciones-1)*item.puntuacion)+valoracion)/item.numeroValoraciones
+       item.puntuacion = Math.round(item.puntuacion * 10) / 10
+     }else{
+       item.tuValoracion=valoracion
+       item.puntuacion = (((item.numeroValoraciones)*item.puntuacion)+valoracion)/(item.numeroValoraciones+1)
+       item.puntuacion = Math.round(item.puntuacion * 10) / 10
+       item.numeroValoraciones++
+     }
+     let listadoMultimediaAux = JSON.parse(localStorage.getItem('listadoMultimedia'))
+     listadoMultimediaAux.map(function(multimedia,index){
+        if(multimedia.id==item.id){
+          multimedia.tuValoracion=item.tuValoracion
+          multimedia.puntuacion = item.puntuacion
+          multimedia.numeroValoraciones=item.numeroValoraciones
+        }
+     })
+     console.log("listadoMultimediaAux",listadoMultimediaAux)
+     localStorage.setItem('listadoMultimedia',JSON.stringify(listadoMultimediaAux))
+  }
   function updateSearch(textoBuscador){
       if(textoBuscador.length > 0){
         let search = textoBuscador.toUpperCase();
@@ -162,40 +187,40 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div style={{width:'100%',height:'100%'}}>
+        <div style={{width:'100%',height:'100%',position:'absolute', overflow:elementValorar?'hidden':'auto'}}>
           <Cabecera nombre='Biblioteca'></Cabecera>
             <div className={`${styles.buttonContainer}`}>
               <div style={{display:'flex',flex:1}}>
                 <button onClick={changeButtonSel.bind(this,'pelicula')} className={`${styles.contentTipo} ${buttonSel=='pelicula' || buttonSel=='todos'? styles.active : ''}`}>
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/film-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono pelicula"
                   />
 
-                  <a style={{marginLeft:4}}>Peliculas</a>
+                  <a>Peliculas</a>
                 </button>
                 <button onClick={changeButtonSel.bind(this,'ebook')} className={`${styles.contentTipo} ${buttonSel=='ebook' || buttonSel=='todos'? styles.active : ''}`} >
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/ebook-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono ebook"
                   />
-                  <a style={{marginLeft:4}}>e-books</a>
+                  <a>e-books</a>
                 </button>
                 <button onClick={changeButtonSel.bind(this,'videojuego')} className={`${styles.contentTipo} ${buttonSel=='videojuego' || buttonSel=='todos'? styles.active : ''}`}>
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/videojuego-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono videojuego"
                   />
-                  <a style={{marginLeft:4}}>Videojuegos</a>
+                  <a>Videojuegos</a>
                 </button>
               </div>
               <div className={`${styles.buscardorContainer}`}>
@@ -206,10 +231,14 @@ export default function Home() {
                  />
               </div>
             </div>
-            <ul style={{display: 'grid','gridTemplateColumns': 'repeat('+parseInt(size.width/260)+',auto)',padding:10}}>
-              {elementosBuscador.map((item) => <CustomItem key={item.id} multimedia={item} eliminarElemento={dispatch.bind(this,{ type: 'deleteElemento',elemento:item})}/>)}
+            <ul style={{display: 'grid','gridTemplateColumns': 'repeat('+parseInt(size.width/260)+',auto)',padding:10,justifyContent: 'center'}}>
+              {elementosBuscador.map((item) => <CustomItem key={item.id}  cambiarValorar={cambiarValorar} multimedia={item} eliminarElemento={dispatch.bind(this,{ type: 'deleteElemento',elemento:item})}/>)}
             </ul>
           </div>
+          { elementValorar?(
+            <ValorarPopUp multimedia={elementValorar} valorar={valorarElemento} cambiarValorar={cambiarValorar} ></ValorarPopUp>
+            ):(null)
+          }
       </main>
     </>
   )
