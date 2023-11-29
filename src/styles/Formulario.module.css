@@ -1,0 +1,43 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 100vh;
+  background: white;
+}
+.form{
+ width:250px;
+}
+.form div{
+ width:100%;
+ margin-bottom: 20px;
+ display:flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction:column;
+ color:black;
+}
+.form div input, .form div select, .form div textarea{
+ width:100%;
+ border-radius:8px;
+ border-style: solid;
+ border-width: 2px;
+ border-color: black;
+ background: transparent;
+color:black;
+padding-left: 8px
+
+}
+.form div textarea{
+ height: 200px
+
+}
+.button{
+ width:250px;
+ border-radius:10px;
+ background: red;
+ color:white;
+ font-size: 20px;
+ height: 30px;
+}

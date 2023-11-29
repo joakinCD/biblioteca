@@ -105,9 +105,21 @@ li {
 button {
  border: none;
 }
-
+a {
+  color:black;
+}
+input {
+  background: white;
+  color:black;
+  border-radius: 8px;
+  padding-left: 8px;
+}
+button:focus {     
+  opacity: 0.5    
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
 }
+
