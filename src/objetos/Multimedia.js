@@ -19,7 +19,7 @@ export default class Multimedia{
     this.fecha=obj.fecha || ''
     this.puntuacion=obj.puntuacion ||  '-'
     this.numeroValoraciones=obj.numeroValoraciones ||  0
-    this.tuValoracion=obj.tuValoracion || -1
+    this.tuValoracion=obj.tuValoracion
   }
   
 } 
