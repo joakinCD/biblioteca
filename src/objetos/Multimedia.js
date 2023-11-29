@@ -7,7 +7,9 @@ export default class Multimedia{
   resumen=''
   imagen=''
   fecha= ''
-  puntuacion=0
+  puntuacion='-'
+  numeroValoraciones=0
+  tuValoracion=-1
   constructor(obj) {
     this.id=obj.id || 0
     this.nombre=obj.nombre || ''
@@ -15,7 +17,9 @@ export default class Multimedia{
     this.resumen=obj.resumen || ''
     this.imagen=obj.imagen || ''
     this.fecha=obj.fecha || ''
-    this.puntuacion=obj.puntuacion ||  0
+    this.puntuacion=obj.puntuacion ||  '-'
+    this.numeroValoraciones=obj.numeroValoraciones ||  0
+    this.tuValoracion=obj.tuValoracion || -1
   }
   
 } 
