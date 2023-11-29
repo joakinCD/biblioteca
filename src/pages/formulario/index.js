@@ -16,7 +16,6 @@ export default function Formulario() {
     fecha:""
   });
   const handleInput = (e) => {
-    console.log("handleInput", e)
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
 
@@ -26,9 +25,7 @@ export default function Formulario() {
     }));
   }
   const handleSelect = (e) => {
-    console.log(e.target.value)
     setSelectValue(e.target.value);
-    
   }
   const addElemento = (e) => {
     let listadoMultimedia = JSON.parse(localStorage.getItem('listadoMultimedia'))

@@ -94,7 +94,6 @@ export default function Home() {
   }, [textoBuscador]);
 
   useEffect(() => {
-    console.log("change listadoMultimedia", state.listadoMultimedia)
     setListadoElementos(state.listadoMultimedia)
     setElementosBuscador(state.listadoMultimedia)
   }, [state.listadoMultimedia]);
@@ -125,7 +124,6 @@ export default function Home() {
       let multimedia = new Multimedia(obj)
       items.push(multimedia)
     }
-    console.log('items',items)
     return items;
   }
   
@@ -168,34 +166,34 @@ export default function Home() {
               <div style={{display:'flex',flex:1}}>
                 <button onClick={changeButtonSel.bind(this,'pelicula')} className={`${styles.contentTipo} ${buttonSel=='pelicula' || buttonSel=='todos'? styles.active : ''}`}>
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/film-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono pelicula"
                   />
 
-                  <a style={{marginLeft:4}}>Peliculas</a>
+                  <a>Peliculas</a>
                 </button>
                 <button onClick={changeButtonSel.bind(this,'ebook')} className={`${styles.contentTipo} ${buttonSel=='ebook' || buttonSel=='todos'? styles.active : ''}`} >
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/ebook-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono ebook"
                   />
-                  <a style={{marginLeft:4}}>e-books</a>
+                  <a>e-books</a>
                 </button>
                 <button onClick={changeButtonSel.bind(this,'videojuego')} className={`${styles.contentTipo} ${buttonSel=='videojuego' || buttonSel=='todos'? styles.active : ''}`}>
                   <Image
-                    width={18}
-                    height={18}
+                    width={22}
+                    height={22}
                     src={'/icons/videojuego-icon.svg'}
                     style={{ filter: 'invert(100%)'}}
                     alt="Icono videojuego"
                   />
-                  <a style={{marginLeft:4}}>Videojuegos</a>
+                  <a>Videojuegos</a>
                 </button>
               </div>
               <div className={`${styles.buscardorContainer}`}>
@@ -206,7 +204,7 @@ export default function Home() {
                  />
               </div>
             </div>
-            <ul style={{display: 'grid','gridTemplateColumns': 'repeat('+parseInt(size.width/260)+',auto)',padding:10}}>
+            <ul style={{display: 'grid','gridTemplateColumns': 'repeat('+parseInt(size.width/260)+',auto)',padding:10,justifyContent: 'center'}}>
               {elementosBuscador.map((item) => <CustomItem key={item.id} multimedia={item} eliminarElemento={dispatch.bind(this,{ type: 'deleteElemento',elemento:item})}/>)}
             </ul>
           </div>
