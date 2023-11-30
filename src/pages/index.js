@@ -71,6 +71,15 @@ export default function Home() {
         listadoMultimediaAux[i]=new Multimedia(listadoMultimediaAux[i])
       }
     }
+    listadoMultimediaAux.sort(function (a, b) {
+        if (a.timestamp > b.timestamp) {
+          return -1;
+        }
+        if (a.timestamp < b.timestamp) {
+          return 1;
+        }
+        return 0;
+    })
     dispatch({ type: 'setListado',listadoElementos:listadoMultimediaAux})
   }, [])
 
@@ -98,7 +107,6 @@ export default function Home() {
     setListadoElementos(state.listadoMultimedia)
     setElementosBuscador(state.listadoMultimedia)
   }, [state.listadoMultimedia]);
-
   function cargarDatosIniciales(){
     let items = []
     for(let i=1;i<10;i++){
@@ -144,11 +152,11 @@ export default function Home() {
 
      if(item.tuValoracion!=-1){
        item.tuValoracion=valoracion
-       item.puntuacion = (((item.numeroValoraciones-1)*item.puntuacion)+valoracion)/item.numeroValoraciones
+       item.puntuacion = (((item.numeroValoraciones-1)*(item.puntuacion=='-'?0:item.puntuacion))+valoracion)/item.numeroValoraciones
        item.puntuacion = Math.round(item.puntuacion * 10) / 10
      }else{
        item.tuValoracion=valoracion
-       item.puntuacion = (((item.numeroValoraciones)*item.puntuacion)+valoracion)/(item.numeroValoraciones+1)
+       item.puntuacion = (((item.numeroValoraciones)*(item.puntuacion=='-'?0:item.puntuacion))+valoracion)/(item.numeroValoraciones+1)
        item.puntuacion = Math.round(item.puntuacion * 10) / 10
        item.numeroValoraciones++
      }
@@ -160,7 +168,6 @@ export default function Home() {
           multimedia.numeroValoraciones=item.numeroValoraciones
         }
      })
-     console.log("listadoMultimediaAux",listadoMultimediaAux)
      localStorage.setItem('listadoMultimedia',JSON.stringify(listadoMultimediaAux))
   }
   function updateSearch(textoBuscador){

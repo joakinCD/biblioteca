@@ -10,6 +10,7 @@ export default class Multimedia{
   puntuacion='-'
   numeroValoraciones=0
   tuValoracion=-1
+  timestamp=0
   constructor(obj) {
     this.id=obj.id || 0
     this.nombre=obj.nombre || ''
@@ -20,6 +21,11 @@ export default class Multimedia{
     this.puntuacion=obj.puntuacion ||  '-'
     this.numeroValoraciones=obj.numeroValoraciones ||  0
     this.tuValoracion=obj.tuValoracion
+    this.getTimestamp()
   }
-  
+  getTimestamp(){
+    let fechaSplit = this.fecha.split("-");
+    let date = new Date( fechaSplit[0], fechaSplit[1] - 1, fechaSplit[2]);
+    this.timestamp=date.getTime()
+  }
 } 
