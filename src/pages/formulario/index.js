@@ -77,7 +77,7 @@ export default function Formulario() {
                 <div>
                   <label>Tipo</label>
                   <select name="select" onChange={handleSelect}>
-                    <option selected value="pelicula">Pelicula</option>
+                    <option selected value="pelicula">Película</option>
                     <option value="videojuego" selected>Videojuego</option>
                     <option value="ebook">Ebook</option>
                   </select>

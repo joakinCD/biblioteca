@@ -100,7 +100,7 @@ export default function Page() {
                 <div>
                   <label>Tipo</label>
                   <select name="select" onChange={handleSelect}>
-                    <option selected={selectValue=='pelicula'} value="pelicula">Pelicula</option>
+                    <option selected={selectValue=='pelicula'} value="pelicula">Película</option>
                     <option selected={selectValue=='videojuego'} value="videojuego" >Videojuego</option>
                     <option selected={selectValue=='ebook'} value="ebook">Ebook</option>
                   </select>

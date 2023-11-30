@@ -31,13 +31,13 @@ const ValorarPopUp = (props) => {
 		        				<p>{elemento.nombre}</p>
 		        		</div>
 		        		<div className={`${styles.separator}`}></div>
-		        		<p className={`${styles.titulo}`}>Valoracion general</p>
+		        		<p className={`${styles.titulo}`}>Valoración general</p>
 		        		<div className={`${styles.center}`} style={{alignItems:'flex-start'}}>
-		        				<p>Numero de valoraciones: {elemento.numeroValoraciones}</p>
+		        				<p>Número de valoraciones: {elemento.numeroValoraciones}</p>
 		        				<p>Media: {elemento.puntuacion}</p>
 		        		</div>
 		        		<div className={`${styles.separator}`}></div>
-		        		<p className={`${styles.titulo}`}>Tú valoración</p>
+		        		<p className={`${styles.titulo}`}>Tu valoración</p>
 		        		<div className={`${styles.center}`}>
 			        		 <Range 
 						        step={1} 
