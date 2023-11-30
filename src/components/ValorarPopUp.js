@@ -24,20 +24,20 @@ const ValorarPopUp = (props) => {
 	        	
 	        		<div style={{flex:1,width:240}}>
 	        			<div style={{position:'absolute',width:240,display:'flex',justifyContent:'flex-end'}}>
-	        				<button style={{background:'transparent',height:30,width:30,borderColor:'black', borderRadius:30,borderStyle:'solid',borderWidth:1}} onClick={props.cambiarValorar.bind(this,false)}>X</button>
+	        				<button style={{color:'black',background:'transparent',height:30,width:30,borderColor:'black', borderRadius:30,borderStyle:'solid',borderWidth:1}} onClick={props.cambiarValorar.bind(this,false)}>X</button>
 	        			</div>
 		        		<p className={`${styles.titulo}`}>Valorar</p>
 		        		<div className={`${styles.center}`}>
 		        				<p>{elemento.nombre}</p>
 		        		</div>
 		        		<div className={`${styles.separator}`}></div>
-		        		<p className={`${styles.titulo}`}>Valoracion general</p>
+		        		<p className={`${styles.titulo}`}>Valoración general</p>
 		        		<div className={`${styles.center}`} style={{alignItems:'flex-start'}}>
-		        				<p>Numero de valoraciones: {elemento.numeroValoraciones}</p>
+		        				<p>Número de valoraciones: {elemento.numeroValoraciones}</p>
 		        				<p>Media: {elemento.puntuacion}</p>
 		        		</div>
 		        		<div className={`${styles.separator}`}></div>
-		        		<p className={`${styles.titulo}`}>Tú valoración</p>
+		        		<p className={`${styles.titulo}`}>Tu valoración</p>
 		        		<div className={`${styles.center}`}>
 			        		 <Range 
 						        step={1} 
