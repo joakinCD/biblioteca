@@ -6,7 +6,7 @@ import React, { useState } from "react"
 import Cabecera from '../../components/Cabecera'
 const inter = Inter({ subsets: ['latin'] })
 import {useRouter} from 'next/navigation'
-
+import Multimedia from '../../objetos/Multimedia'
 export default function Formulario() {
   const router = useRouter()
   const [selectValue, setSelectValue] = useState('pelicula');
@@ -37,10 +37,13 @@ export default function Formulario() {
               nombre:formData.nombre,
               resumen:formData.resumen,
               fecha:formData.fecha,
-              type:selectValue
+              type:selectValue,
+              puntuacion:'-',
+              numeroValoraciones:0,
+              tuValoracion:-1
             }
-            
-            listadoMultimedia.push(nuevoElemento)
+           
+            listadoMultimedia.push(new Multimedia(nuevoElemento))
             localStorage.setItem('listadoMultimedia',JSON.stringify(listadoMultimedia))
             alert('Elemento creado correctamente')
             router.replace('/')
