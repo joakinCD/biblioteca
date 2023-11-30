@@ -129,7 +129,8 @@ export default function Home() {
         fecha:'2023-12-0'+i,
         puntuacion:Math.floor(Math.random() * 10)+1,
         numeroValoraciones:Math.floor(Math.random() * 20)+1,
-        resumen:'resumen resumen  resumen  resumen  resumen  resumen  resumen  resumen '
+        resumen:'resumen resumen  resumen  resumen  resumen  resumen  resumen  resumen ',
+        tuValoracion:-1
       }
       let multimedia = new Multimedia(obj)
       items.push(multimedia)

@@ -24,7 +24,7 @@ const ValorarPopUp = (props) => {
 	        	
 	        		<div style={{flex:1,width:240}}>
 	        			<div style={{position:'absolute',width:240,display:'flex',justifyContent:'flex-end'}}>
-	        				<button style={{background:'transparent',height:30,width:30,borderColor:'black', borderRadius:30,borderStyle:'solid',borderWidth:1}} onClick={props.cambiarValorar.bind(this,false)}>X</button>
+	        				<button style={{color:'black',background:'transparent',height:30,width:30,borderColor:'black', borderRadius:30,borderStyle:'solid',borderWidth:1}} onClick={props.cambiarValorar.bind(this,false)}>X</button>
 	        			</div>
 		        		<p className={`${styles.titulo}`}>Valorar</p>
 		        		<div className={`${styles.center}`}>
