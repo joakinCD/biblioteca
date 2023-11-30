@@ -41,7 +41,7 @@ const CustomItem = (props) => {
                 priority
               />
             </div>
-            <div style={{padding:8,borderRadius:8,height:60,width:250,transform:'translateY(-61px)',position:'absolute',background: 'linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%)',display:'flex',flexDirection:'row'}}>
+            <div style={{zIndex:0,padding:8,borderRadius:8,height:60,width:250,transform:'translateY(-61px)',position:'absolute',background: 'linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%)',display:'flex',flexDirection:'row'}}>
                 <div style={{display:'flex',flexDirection:'column',flex:1}}>
                     <div style={{display:'flex'}}>
                         <Image
